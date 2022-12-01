@@ -22,7 +22,16 @@ class App extends Component {
             I learn at {this.state.academy}.
           </p>
           <button onClick={() => {
-            this.setState({ name: { firstName: 'Yihua', lastName: 'Zhang' } });
+            // this.setState({ name: { firstName: 'Yihua', lastName: 'Zhang' } });
+            // Ensuring console.log runs after state is updated through secondary callback
+            this.setState(() => {
+              return {
+                name: { firstName: 'Yihua', lastName: 'Zhang' }
+              }
+            },
+              () => {
+                console.log(this.state);
+              });
           }}>Change Name</button>
         </header>
       </div>
