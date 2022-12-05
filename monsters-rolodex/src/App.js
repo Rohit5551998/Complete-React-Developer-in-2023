@@ -38,9 +38,6 @@ class App extends Component {
         () => {
           return { monsters: users }
         },
-        () => {
-          console.log(this.state);
-        }
       )
       );
   }
@@ -96,7 +93,7 @@ class App extends Component {
             </div>;
           })
         } */}
-        <CardList />
+        <CardList monsters={filteredMonsters} />
       </div >
     );
   }
