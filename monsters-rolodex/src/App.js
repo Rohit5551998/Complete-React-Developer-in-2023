@@ -29,7 +29,6 @@ class App extends Component {
       monsters: [],
       searchField: '',
     };
-    console.log('Constructor');
   }
 
   componentDidMount() {
@@ -72,7 +71,6 @@ class App extends Component {
   // );
   // }
   onSearchChange = (event) => {
-    console.log(event.target.value);
     const searchField = event.target.value.toLowerCase();
     this.setState(() => {
       return { searchField };
@@ -80,8 +78,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('render');
-
     const { monsters, searchField } = this.state;
     const { onSearchChange } = this;
 
