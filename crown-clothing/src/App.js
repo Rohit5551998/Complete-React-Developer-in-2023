@@ -1,7 +1,8 @@
-import { Outlet, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
-// import Directory from './components/directory/directory.component';
 import Home from './routes/home/home.component';
+import Navigation from './routes/navigation/navigation.component';
+// import Directory from './components/directory/directory.component';
 
 // const App = () => {
 // Moved to Home Component
@@ -37,16 +38,6 @@ import Home from './routes/home/home.component';
 //   <Directory categories={categories} />
 // );
 // }
-const Navigation = () => {
-  return (
-    <div>
-      <div>
-        <h1> I am the Navigation Bar.</h1>
-      </div>
-      <Outlet />
-    </div>
-  );
-}
 
 const Shop = () => {
   return (
