@@ -1,4 +1,8 @@
 import { useState } from "react";
+import {
+  createAuthUserWithEmailAndPassword,
+  createUserDocumentFromAuth,
+} from "../../utils/firebase/firebase.util";
 
 const defaultFormFields = {
   displayName: '',
@@ -13,16 +17,39 @@ const SignUpForm = () => {
 
   console.log(formFields);
 
+  const resetFormFields = () => {
+    setFormFields(defaultFormFields);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    };
+
+    try {
+      let { user } = await createAuthUserWithEmailAndPassword(email, password);
+      // user = { ...user, displayName } // user = { ...user, displayName: displayName}
+      const userDocRef = await createUserDocumentFromAuth(user, { displayName });
+      resetFormFields();
+    } catch (error) {
+      console.log("User Creation encountered an Error", error);
+    }
+
+  };
+
   const handleChange = (event) => {
     const { name, value } = event.target;
 
     setFormFields({ ...formFields, [name]: value });
-  }
+  };
 
   return (
     <div>
       <h1>Sign Up with your Email and Password</h1>
-      <form onSubmit={() => { }}>
+      <form onSubmit={handleSubmit}>
         <label>Display Name</label>
         <input
           type="text"
