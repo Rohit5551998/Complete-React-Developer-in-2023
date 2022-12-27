@@ -1,6 +1,7 @@
 import "./sign-in-form.styles.scss";
 
-import { useContext, useState } from "react";
+// import { useContext, useState } from "react";
+import { useState } from "react";
 import {
   signInWithGooglePopUp,
   createUserDocumentFromAuth,
@@ -10,7 +11,7 @@ import {
 import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 
-import { UserContext } from "../../contexts/user.context";
+// import { UserContext } from "../../contexts/user.context";
 
 const defaultFormFields = {
   email: '',
@@ -22,7 +23,7 @@ const SignInForm = () => {
   const { email, password } = formFields;
 
   // console.log(formFields);
-  const { setCurrentUser } = useContext(UserContext);
+  // const { setCurrentUser } = useContext(UserContext);
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -35,7 +36,7 @@ const SignInForm = () => {
       // const response = await signInAuthUserWithEmailAndPassword(email, password);
       // console.log(response);
       const { user } = await signInAuthUserWithEmailAndPassword(email, password);
-      setCurrentUser(user);
+      // setCurrentUser(user); Centeralized Authentication in User Context File
       resetFormFields();
     } catch (error) {
       switch (error.code) {
@@ -59,8 +60,10 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopUp();
-    await createUserDocumentFromAuth(user);
+    await signInWithGooglePopUp();
+    // const { user } = await signInWithGooglePopUp();
+    // setCurrentUser(user);
+    // await createUserDocumentFromAuth(user);
   }
 
   return (
